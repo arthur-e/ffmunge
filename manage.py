@@ -26,18 +26,18 @@ def list_variables(path):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='A command-line tool for munging American FactFinder tables')
 
     # Commands
     commands_group = parser.add_mutually_exclusive_group()
-    commands_group.add_argument('-l', '--list-variables',
-        help='List the FactFinder variables found in this directory')
-    commands_group.add_argument('-e', '--extract',
-        help='Extract a table as a formatted CSV, to pipe into a file')
+    commands_group.add_argument('-l', '--list-variables', metavar='PATH',
+        help='list the FactFinder variables found in this directory')
+    commands_group.add_argument('-e', '--extract', metavar='CSV',
+        help='extract a table as a formatted CSV, to pipe into a file')
 
     args = parser.parse_args()
     if args.list_variables:
         list_variables(args.list_variables)
 
     if args.extract:
-        extract(args.extract)
+        extract(args.extract, args.derivative)
